@@ -13,7 +13,7 @@
             "compilerPath": "D:\\x86_64-12.2.0-release-win32-sjlj-rt_v10-rev0\\mingw64\\bin\\gcc.exe",
             "cStandard": "c17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4

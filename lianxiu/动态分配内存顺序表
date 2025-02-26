@@ -4,13 +4,15 @@
 typedef int ElemType;//表内数据类型 可能更改
 
 typedef struct{
-    ElemType date[MAXSIZE];//数组自动初始化
+    ElemType *date;//数组自动初始化，存数据的地址
     int length;
 }Seqlist;//线性表内数据类型表达
-
-void iniList(Seqlist *L)
+Seqlist* initList()
 {
-    L->length = 0;//初始化
+    Seqlist* L = (Seqlist*)malloc(sizeof(Seqlist));
+    L->date = (ElemType*)malloc(sizeof(ElemType)*MAXSIZE);
+    L->length = 0;
+    return L;
 }
 
 int add(Seqlist *l,ElemType b){//返回值判断错误操作
@@ -87,16 +89,15 @@ ElemType findElex(Seqlist *l,ElemType b)
 
 int main()
 {
-    Seqlist List;
-    iniList(&List);
-    add(&List,33);
-    add(&List,44);
-    add(&List,35);
-    add(&List,24);
-    add(&List,63);
-    add(&List,334);
-    listElem(&List);
-    insertElem(&List,3,376);
-    listElem(&List);
+    Seqlist* List = iniList();
+    add(List,33);
+    add(List,44);
+    add(List,35);
+    add(List,24);
+    add(List,63);
+    add(List,334);
+    listElem(List);
+    insertElem(List,3,376);
+    listElem(List);
     return 0;
 }
