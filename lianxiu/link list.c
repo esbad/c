@@ -1,12 +1,12 @@
 #include<stdio.h>
-
+#include<malloc.h>
 #define MAXSIZE 100
 
 typedef int ElemType;
 typedef struct node
 {
     ElemType date;
-    struct node *next;//存数据和下一个数据的地址
+    struct node* next;//存数据和下一个数据的地址
 }Node;
 
 Node* initList()//初始化，返回其地址
@@ -40,7 +40,7 @@ void listNode(Node* l)//给头节点
 Node* get_tail(Node* l)//给头节点
 {
     Node* p = l->next;//传第一个节点的地址
-    while(p != NULL)
+    while(p->next != NULL)
     {
         p = p->next;//传下一个节点的地址
     }
@@ -55,7 +55,7 @@ Node* insertTail(Node* tail,ElemType e)//给尾节点
     p->next = NULL;
     return p;//返回新的尾节点
 }
-
+//指定位置插入
 int insertNode(Node* l,int pos,ElemType e)
 {
     //获取前驱节点
@@ -76,6 +76,47 @@ int insertNode(Node* l,int pos,ElemType e)
     p->next = q;
     return 1;
 }
+//删除指定节点
+int deleteNode(Node* l,int pot)
+{
+    for(int i = 0;i < pot - 1;i++)
+    {
+        l = l->next;
+        if(l == NULL)
+            return 0;
+    }
+    if(l->next == NULL)
+        return 0;
+    Node* p = l->next;
+    l->next = p->next;
+    free(p);
+    return 1;
+}
+//获取长度
+int getlen(Node* l)
+{
+    Node* p = l;
+    int len = 0;
+    while(p != NULL)
+    {
+        p = p->next;
+        len++;
+    }
+    return len;
+}
+
+//释放链表
+void freeNode(Node* l)
+{
+    Node* p = l;//不释放头节点,还是要释放
+    Node* q;
+    while(p != NULL)
+    {
+        q = p->next;
+        free(p);
+        p = q;
+    }
+}
 
 int main()
 {
@@ -94,6 +135,10 @@ int main()
     listNode(list);
     insertNode(list,5,477);
     listNode(list);
-
+    deleteNode(list,3);
+    int len = getlen(list);
+    printf("%d",len);
+    listNode(list);
+    freeNode(list);
     return 0;
 }

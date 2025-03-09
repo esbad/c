@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "malloc.h": "c",
+        "动态分配内存顺序表": "cpp",
+        "stdlib.h": "c"
+    }
+}
